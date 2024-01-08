@@ -15,3 +15,5 @@ license: MIT
 dependencies:
   lexbor:
     github: kostya/lexbor
+  myhtml:
+    github: kostya/myhtml
