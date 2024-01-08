@@ -1,12 +1,15 @@
+# `DomainUtilv2` is a utility module for extracting domain names from hostnames.
+# It is a reimplementation of the original DomainUtil module, but with better
+# performance.
 module DomainUtilv2
   Log = ::Log.for("DomainUtilv2")
-  # contains the TLD database as a set of top level domain extensions
+  # Contains the TLD database as a set of top level domain extensions
   # (com, net, etc.)
   #
-  # `#update_tlds` must be called before this set will be populated
+  # `#update_tlds` must be called before this set will be populated.
   class_getter tld_extensions : Set(String) = Set(String).new
 
-  # contains the public suffix database from mozilla as a set
+  # Contains the public suffix database from mozilla as a set
   # of registerable domain extensions (com, com.mx, etc.). This
   # set is a super set of `#tld_extensions` and all registerable
   # domain names.
@@ -23,13 +26,13 @@ module DomainUtilv2
   # see `#update_tlds` or `#update_suffixes`
   class_property backoff_factor : Float64 = 1.5
 
-  # the URL for the IANA TLD extensions list
+  # The URL for the IANA TLD extensions list
   TLD_URL = "https://www.iana.org/domains/root/db"
 
-  # the url for the mozilla public suffixes list
+  # The URL for the mozilla public suffixes list
   SUFFIX_URL = "https://publicsuffix.org/list/public_suffix_list.dat"
 
-  # updates the tld extensions database by downloading and parsing html from `#TLD_URL`. Upon
+  # Updates the tld extensions database by downloading and parsing html from `#TLD_URL`. Upon
   # a failure (non-200 status code) exponential backoff will be used until `retry_count` is reached.
   #
   # arguments:
@@ -57,7 +60,7 @@ module DomainUtilv2
     Log.info { "successfully loaded #{self.tld_extensions.size} top level domain extensions from IANA" }
   end
 
-  # updates the mozilla public suffixes database by downloading and parsing data from `#SUFFIX_URL`. Upon
+  # Updates the mozilla public suffixes database by downloading and parsing data from `#SUFFIX_URL`. Upon
   # a failure (non-200 status code) exponential backoff will be used until `retry_count` is reached.
   #
   # arguments:
@@ -87,7 +90,7 @@ module DomainUtilv2
     Log.info { "successfully loaded #{self.suffixes.size} domain suffixes from mozilla" }
   end
 
-  # extracts the domain name from `hostname` using the public
+  # Extracts the domain name from `hostname` using the public
   # suffixes database to identify the portion of hostname that
   # is a public suffix. The next token to the left is returned
   # (with its suffix) as the domain name. This effectively strips
@@ -96,6 +99,10 @@ module DomainUtilv2
   # will be used (meaning "co.uk" would be the detected domain
   # for hostanmes like `site.co.uk`). By default the mozilla
   # public suffixes database is used.
+  #
+  # arguments:
+  # `hostname` (String): A String that specifies the hostname to extract the domain name from.
+  # `tld_only` (optional. Boolean): If set to `true`, only top-level domains according to IANA will be used.
   def self.strip_subdomains(hostname : String, tld_only = false) : String
     set = tld_only ? self.tld_extensions : self.suffixes
     (tld_only ? self.update_tlds : self.update_suffixes) if set.empty?
@@ -109,7 +116,7 @@ module DomainUtilv2
     return hostname_downcase
   end
 
-  # removes the domain extension / suffix from the end of the specified
+  # Removes the domain extension / suffix from the end of the specified
   # hostname. Follows the same options and semantics as `#strip_subdomains`.
   def self.strip_suffix(hostname : String, tld_only = false) : String
     set = tld_only ? self.tld_extensions : self.suffixes
