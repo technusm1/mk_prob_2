@@ -1,4 +1,3 @@
-require "myhtml"
 require "http/client"
 require "log"
 

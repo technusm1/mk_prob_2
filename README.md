@@ -29,6 +29,7 @@ The only problem that remains is that the index search is an O(n) algorithm. We 
 Finally 120x improvement!
 
 ## Comments (Problem - 2 - Domain name utilities)
-While things work fine with `DomainUtil` on an older Linux machine, my Mac machine simply seems to hate it. Here are some problems I encountered:
-- `myhtml` dependency didn't compile at all on my Mac.
-- `HTTP::Client.get` works on Linux, but errors out on macOS, complaining about domain ceritificate verification failure.
+Some problems I encountered while setting up the existing code:
+- `myhtml` dependency didn't compile at all on my Mac. `lexbor` seems to work nicely as a drop-in replacement.
+- `HTTP::Client.get` errors out on macOS, complaining about domain ceritificate verification failure.
+- 
