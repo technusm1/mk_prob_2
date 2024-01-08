@@ -1,6 +1,7 @@
 # `DomainUtilv2` is a utility module for extracting domain names from hostnames.
 # It is a reimplementation of the original DomainUtil module, but with better
 # performance.
+# Author: Maheep Kumar (technusm1)
 module DomainUtilv2
   Log = ::Log.for("DomainUtilv2")
   # Contains the TLD database as a set of top level domain extensions
