@@ -7,11 +7,11 @@ Correspondingly, all improved code exists in v2 versions of these modules: `Doma
 ## Usage
 To benchmark the problem solutions (both original and improved), run the corresponding code using the following commands:
 - Change to the project directory.
-- For problem - 1: `crystal run --release --no-debug ./src/mk_prob_1.cr`
-- For problem - 2: `crystal run --release --no-debug ./src/mk_prob_2.cr`
+- For problem - A: `crystal run --release --no-debug ./src/mk_prob_1.cr`
+- For problem - B: `crystal run --release --no-debug ./src/mk_prob_2.cr`
 - You can also use `crystal spec` command to run some tests written to ensure that our code is generating the correct results.
 
-## Comments (Problem - 1 - Tax calculation)
+## Comments (Problem - A - Tax calculation)
 ### Some obvious improvements
 - Modify `BRACKETS` to use tuple instead of array and use symbols instead of strings. Tuples are present on stack instead of heap, so less expensive to access. Symbols make up for better keys compared to strings.
 - Instead of zip -> reverse -> each. we can simply use a numbered loop. This will avoid intermediate data structures creation.
@@ -29,7 +29,7 @@ The only problem that remains is that the index search is an O(n) algorithm. We 
 
 Finally 120x improvement!
 
-## Comments (Problem - 2 - Domain name utilities)
+## Comments (Problem - B - Domain name utilities)
 Some problems I encountered while setting up the existing code:
 - `myhtml` dependency didn't compile at all on my Mac. `lexbor` seems to work nicely as a drop-in replacement.
 - `HTTP::Client.get` errors out on macOS, complaining about domain ceritificate verification failure. As a result, I have disabled certificate verification.

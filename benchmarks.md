@@ -4,7 +4,7 @@ Below are some benchmarking results done on my MacBook Pro 2019 (16-inch) with t
 - 16 GB 2667 MHz DDR4
 - OS: macOS Sonoma 14.2
 
-### For Problem - 1
+### For Problem - A
 ```
 TaxUtil.calc_taxes(0) # => 0.0
 TaxUtilv2.calc_taxes(0) # => 0.0
@@ -39,7 +39,7 @@ new precompute with precompute indices 824.58M (  1.21ns) (± 3.63%)  0.0B/op   
 
 ```
 
-### For Problem - 2
+### For Problem - B
 ```
 strip_subdomains:
 DomainUtil.strip_subdomains("maps.kagi.co.uk") # => "kagi.co.uk"
