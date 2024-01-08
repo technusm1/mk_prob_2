@@ -1,0 +1,17 @@
+name: mk_prob_2
+version: 0.1.0
+
+authors:
+  - Maheep Kumar Kathuria <me@maheepk.net>
+
+targets:
+  mk_prob_2:
+    main: src/mk_prob_2.cr
+
+crystal: '>= 1.10.1'
+
+license: MIT
+
+dependencies:
+  lexbor:
+    github: kostya/lexbor
