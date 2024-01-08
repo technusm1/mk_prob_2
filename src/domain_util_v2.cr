@@ -1,3 +1,7 @@
+require "lexbor"
+require "http/client"
+require "log"
+
 # `DomainUtilv2` is a utility module for extracting domain names from hostnames.
 # It is a reimplementation of the original DomainUtil module, but with better
 # performance.

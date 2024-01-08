@@ -1,3 +1,7 @@
+require "myhtml"
+require "http/client"
+require "log"
+
 module DomainUtil
     Log = ::Log.for("DomainUtil")
     # contains the TLD database as a set of top level domain extensions

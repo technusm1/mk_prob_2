@@ -1,6 +1,3 @@
-require "lexbor"
-require "http/client"
-require "log"
 require "benchmark"
 require "./domain_util"
 require "./domain_util_v2"
