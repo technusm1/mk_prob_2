@@ -8,11 +8,12 @@ require "log"
 # Author: Maheep Kumar (technusm1)
 module DomainUtilv2
   Log = ::Log.for("DomainUtilv2")
+  Log.level = ::Log::Severity::None
   # Contains the TLD database as a set of top level domain extensions
   # (com, net, etc.)
   #
   # `#update_tlds` must be called before this set will be populated.
-  class_getter tld_extensions : Set(String) = Set(String).new
+  class_getter tld_extensions : Set(String) = Set(String).new(initial_capacity: 10_000)
 
   # Contains the public suffix database from mozilla as a set
   # of registerable domain extensions (com, com.mx, etc.). This
@@ -20,7 +21,7 @@ module DomainUtilv2
   # domain names.
   #
   # `#update_suffixes` must be called before this set will be populated
-  class_getter suffixes : Set(String) = Set(String).new
+  class_getter suffixes : Set(String) = Set(String).new(initial_capacity: 10_000)
 
   # see `#update_tlds` or `#update_suffixes`
   class_property retry_count : Int32 = 5
@@ -58,7 +59,6 @@ module DomainUtilv2
       raise "could not access #{TLD_URL} after several retries, status_code: #{response.status_code}"
     end
     lexbor = Lexbor::Parser.new(response.body)
-    @@tld_extensions = Set(String).new
     lexbor.css("span.domain.tld > a").each do |node|
       @@tld_extensions << node.inner_text[1..]
     end
@@ -85,12 +85,14 @@ module DomainUtilv2
       end
       raise "could not access #{SUFFIX_URL} after several retries, status_code: #{response.status_code}"
     end
-    @@suffixes = Set(String).new
-    response.body.lines.each do |line|
+    response.body.each_line do |line|
       line = line.strip
       next if line.starts_with?("/") || line.empty?
-      line = line[1..] if line.starts_with?("*")
-      @@suffixes << line
+      if line.starts_with?("*")
+        @@suffixes << line[1..]
+      else
+        @@suffixes << line
+      end
     end
     Log.info { "successfully loaded #{self.suffixes.size} domain suffixes from mozilla" }
   end

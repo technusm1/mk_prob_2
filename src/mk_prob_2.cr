@@ -4,11 +4,12 @@ require "./domain_util_v2"
 
 
 puts("strip_subdomains:")
-p! DomainUtil.strip_subdomains("maps.kagi.com")
-p! DomainUtilv2.strip_subdomains("maps.kagi.com")
 
 p! DomainUtil.strip_subdomains("maps.kagi.co.uk")
 p! DomainUtilv2.strip_subdomains("maps.kagi.co.uk")
+
+p! DomainUtil.strip_subdomains("maps.kagi.com")
+p! DomainUtilv2.strip_subdomains("maps.kagi.com")
 
 p! DomainUtil.strip_subdomains("kagi.co.uk")
 p! DomainUtilv2.strip_subdomains("kagi.co.uk")

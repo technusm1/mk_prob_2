@@ -4,6 +4,7 @@ require "log"
 
 module DomainUtil
     Log = ::Log.for("DomainUtil")
+    Log.level = ::Log::Severity::None
     # contains the TLD database as a set of top level domain extensions
     # (com, net, etc.)
     #
