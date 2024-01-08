@@ -1,3 +1,4 @@
+require "lexbor"
 require "http/client"
 require "log"
 
