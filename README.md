@@ -9,6 +9,7 @@ To benchmark the problem solutions (both original and improved), run the corresp
 - Change to the project directory.
 - For problem - 1: `crystal run --release --no-debug ./src/mk_prob_1.cr`
 - For problem - 2: `crystal run --release --no-debug ./src/mk_prob_2.cr`
+- You can also use `crystal spec` command to run some tests written to ensure that our code is generating the correct results.
 
 ## Comments (Problem - 1 - Tax calculation)
 ### Some obvious improvements
@@ -31,5 +32,12 @@ Finally 120x improvement!
 ## Comments (Problem - 2 - Domain name utilities)
 Some problems I encountered while setting up the existing code:
 - `myhtml` dependency didn't compile at all on my Mac. `lexbor` seems to work nicely as a drop-in replacement.
-- `HTTP::Client.get` errors out on macOS, complaining about domain ceritificate verification failure.
-- 
+- `HTTP::Client.get` errors out on macOS, complaining about domain ceritificate verification failure. As a result, I have disabled certificate verification.
+- Another unpredictable factor is logging. We never know when our dear sweet Logger may output content on the console, perhaps impacting performance in some cases. So, logging has been turned off for both original and new modules.
+
+Owing to the above reasons, the benchmarking of `DomainUtil` modules has been done by pre-initializing the TLDs and suffixes to ensure that network latencies do not impact the tests.
+
+## Benchmarks
+Benchmarks have been listed separately in this file: [benchmarks.md](./benchmarks.md).
+
+Thank you for the assignment and considering my application.
