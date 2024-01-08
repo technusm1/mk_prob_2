@@ -1,5 +1,3 @@
-require "crystalline"
-
 module DomainUtilv2
   Log = ::Log.for("DomainUtilv2")
   # contains the TLD database as a set of top level domain extensions
