@@ -122,7 +122,8 @@ module TaxUtil
   # since we are using PRECOMPUTED_TAXES to improve
   # the performance of tax calculation step
   # NOTE: I tried using binary search to find the index of the bracket,
-  # but it was slower than the current implementation
+  # but the performance was slower than the current implementation.
+  # Could be that the bracket is too small for binary search to be effective.
   def self.calc_taxes_v2_precompute(income, status = :single)
     bracket = BRACKETS_NEW[status]
     percentages = BRACKETS_NEW[:percent]
