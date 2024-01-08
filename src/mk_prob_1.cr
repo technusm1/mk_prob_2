@@ -2,31 +2,33 @@ require "benchmark"
 require "./tax_util"
 require "./tax_util_v2"
 
-p TaxUtil.calc_taxes(0)
-p TaxUtilv2.calc_taxes(0)
-p TaxUtilv2.calc_taxes_precompute(0)
-p TaxUtilv2.calc_taxes_precompute_with_precompute_indices(0)
+p! TaxUtil.calc_taxes(0)
+p! TaxUtilv2.calc_taxes(0)
+p! TaxUtilv2.calc_taxes_precompute(0)
+p! TaxUtilv2.calc_taxes_precompute_with_precompute_indices(0)
+puts "\n"
+p! TaxUtil.calc_taxes(1)
+p! TaxUtilv2.calc_taxes(1)
+p! TaxUtilv2.calc_taxes_precompute(1)
+p! TaxUtilv2.calc_taxes_precompute_with_precompute_indices(1)
+puts "\n"
+p! TaxUtil.calc_taxes(50000.0)
+p! TaxUtilv2.calc_taxes(50000.0)
+p! TaxUtilv2.calc_taxes_precompute(50000.0)
+p! TaxUtilv2.calc_taxes_precompute_with_precompute_indices(50000.0)
+puts "\n"
+p! TaxUtil.calc_taxes(85525.0)
+p! TaxUtilv2.calc_taxes(85525.0)
+p! TaxUtilv2.calc_taxes_precompute(85525.0)
+p! TaxUtilv2.calc_taxes_precompute_with_precompute_indices(85525.0)
+puts "\n"
+p! TaxUtil.calc_taxes(518402.5)
+p! TaxUtilv2.calc_taxes(518402.5)
+p! TaxUtilv2.calc_taxes_precompute(518402.5)
+p! TaxUtilv2.calc_taxes_precompute_with_precompute_indices(518402.5)
 
-p TaxUtil.calc_taxes(1)
-p TaxUtilv2.calc_taxes(1)
-p TaxUtilv2.calc_taxes_precompute(1)
-p TaxUtilv2.calc_taxes_precompute_with_precompute_indices(1)
-
-p TaxUtil.calc_taxes(50000.0)
-p TaxUtilv2.calc_taxes(50000.0)
-p TaxUtilv2.calc_taxes_precompute(50000.0)
-p TaxUtilv2.calc_taxes_precompute_with_precompute_indices(50000.0)
-
-p TaxUtil.calc_taxes(85525.0)
-p TaxUtilv2.calc_taxes(85525.0)
-p TaxUtilv2.calc_taxes_precompute(85525.0)
-p TaxUtilv2.calc_taxes_precompute_with_precompute_indices(85525.0)
-
-p TaxUtil.calc_taxes(518402.5)
-p TaxUtilv2.calc_taxes(518402.5)
-p TaxUtilv2.calc_taxes_precompute(518402.5)
-p TaxUtilv2.calc_taxes_precompute_with_precompute_indices(518402.5)
-
+puts "\n"
+puts "Benchmarking..."
 Benchmark.ips do |x|
     x.report("original") do
       TaxUtil.calc_taxes(50_000)
