@@ -37,6 +37,8 @@ Some problems I encountered while setting up the existing code:
 
 Owing to the above reasons, the benchmarking of `DomainUtil` modules has been done by pre-initializing the TLDs and suffixes to ensure that network latencies do not impact the tests.
 
+Basic improvements such as using avoiding string split and using string slices gets us to 4x.
+
 ## Benchmarks
 Benchmarks have been listed separately in this file: [benchmarks.md](./benchmarks.md).
 
